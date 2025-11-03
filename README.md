@@ -1,11 +1,9 @@
-# ruralmind-connect
-A web application for finding healthcare specialists
-# Specialist Finder Web Application
+# RuralMind Connect
 
-A responsive healthcare platform for finding specialists and mental wellness resources.
+A web application for finding healthcare specialists in rural areas.
 
 ## 🚀 Live Demo
-[View Live Site](https://YOUR_USERNAME.github.io/specialist-finder-app)
+[View Live Site](https://chaltharkava89.github.io/ruralmind-connect/)
 
 ## ✨ Features
 - Specialist directory with contact information
@@ -13,6 +11,7 @@ A responsive healthcare platform for finding specialists and mental wellness res
 - Billing and payment history
 - Local community resources
 - Interactive wellness techniques
+- Mental health support tools
 - Fully responsive design
 
 ## 🛠️ Built With
@@ -28,10 +27,17 @@ Works perfectly on:
 - Mobile phones
 
 ## 🎯 Usage
-1. Browse available specialists
-2. Create an account
-3. Access wellness resources
-4. Find local support groups
+1. Browse available healthcare specialists
+2. Create an account for personalized access
+3. Access mental wellness resources
+4. Find local community support groups
+5. Manage appointments and payments
+
+## 🌟 About RuralMind Connect
+Bringing healthcare accessibility to rural communities through technology and community support networks.
 
 ## 🔧 Installation
-No installation required! Visit the live site above.
+No installation required! Simply visit the live site above.
+
+## 📞 Support
+For support or queries, please contact through the application interface.
