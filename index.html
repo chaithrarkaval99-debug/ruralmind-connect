@@ -1,59 +1,1123 @@
-import { Stethoscope, Pill, Library, BedDouble, MessageSquare, Smile } from 'lucide-react';
-import { FeatureCard } from '@/components/home/FeatureCard';
-import type { Feature } from '@/lib/types';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RuralMind Connect | Find Healthcare Specialists</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c5aa0;
+            --secondary: #4a90e2;
+            --light: #f5f7fa;
+            --dark: #333;
+            --gray: #777;
+            --light-gray: #eaeaea;
+            --success: #28a745;
+            --warning: #ffc107;
+            --accent: #22c55e;
+            --danger: #dc3545;
+            --bg-gradient-start: #f6f9ff;
+            --bg-gradient-end: #eef2ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(180deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        header {
+            background: radial-gradient(1200px 400px at 20% -10%, rgba(76, 161, 255, 0.15), transparent),
+                        radial-gradient(1200px 400px at 80% -10%, rgba(34, 197, 94, 0.12), transparent),
+                        white;
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin: 12px 0 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--light-gray);
+            position: relative;
+        }
 
-const features: Feature[] = [
-  {
-    title: 'Find Doctor',
-    description: 'Search for specialists near you.',
-    href: '/doctors',
-    icon: Stethoscope,
-  },
-  {
-    title: 'Order Medicine',
-    description: 'Get medicines delivered to your doorstep.',
-    href: '/medicine',
-    icon: Pill,
-  },
-  {
-    title: 'Health Library',
-    description: 'Read articles on health and wellness.',
-    href: '/library',
-    icon: Library,
-  },
-  {
-    title: 'NightCare',
-    description: 'Emergency support and care, 24/7.',
-    href: '/nightcare',
-    icon: BedDouble,
-  },
-  {
-    title: 'Community Chat',
-    description: 'Connect with your community.',
-    href: '/chat',
-    icon: MessageSquare,
-  },
-  {
-    title: 'Mental Wellness',
-    description: 'Resources for a healthy mind.',
-    href: '/wellness',
-    icon: Smile,
-  },
-];
+        h2::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 56px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 3px;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 15px 0 10px;
+        }
+        
+        section {
+            background-color: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+            margin-bottom: 22px;
+        }
 
-export default function Home() {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <section className="text-center">
-        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Welcome to RuralMind Connect</h1>
-        <p className="mt-2 text-lg text-muted-foreground">Your trusted partner in rural healthcare.</p>
-      </section>
+        .muted {
+            color: var(--gray);
+        }
 
-      <section className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature) => (
-          <FeatureCard key={feature.title} feature={feature} />
-        ))}
-      </section>
+        .hero-title {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            color: var(--gray);
+            margin-bottom: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 6px 18px rgba(44, 90, 160, 0.25);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(74, 144, 226, 0.28);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: var(--primary);
+            border: 1px solid var(--light-gray);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f8fafc;
+            color: var(--secondary);
+        }
+
+        .btn-success {
+            background-color: var(--success);
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-small {
+            padding: 8px 14px;
+            font-size: 0.85rem;
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: #000;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+        
+        .specialist-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .specialist-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .inline-input {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 1px solid var(--light-gray);
+            border-radius: 999px;
+            padding: 6px 10px;
+        }
+
+        .inline-input input,
+        .inline-input select {
+            border: none;
+            outline: none;
+            font-size: 0.95rem;
+            background: transparent;
+        }
+
+        .specialist-card {
+            flex: 1 1 300px;
+            padding: 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            background: linear-gradient(180deg, #ffffff, #fafbff);
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+            position: relative;
+        }
+        
+        .specialist-card:hover {
+            transform: translateY(-4px);
+            border-color: #dbe7ff;
+            box-shadow: 0 10px 24px rgba(76, 161, 255, 0.15);
+        }
+        
+        .specialist-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .specialist-contact {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .distance-badge {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 4px 8px;
+            background: #eef4ff;
+            color: var(--primary);
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .specialty-badge {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 4px 8px;
+            background: #f0f9ff;
+            color: #0369a1;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        .rating {
+            color: #f59e0b;
+            margin-top: 4px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+        
+        .about-me {
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        .logistics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .logistics-item {
+            flex: 1 1 200px;
+        }
+        
+        .payment-card {
+            background: linear-gradient(180deg, #f6faff, #f2f6ff);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .payment-card.paid {
+            border-left-color: var(--success);
+        }
+
+        .payment-card.pending {
+            border-left-color: var(--warning);
+        }
+
+        .payment-card.overdue {
+            border-left-color: var(--danger);
+        }
+        
+        .payment-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .payment-amount {
+            font-weight: bold;
+            color: var(--primary);
+            margin-top: 5px;
+        }
+
+        .payment-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .status-paid {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-overdue {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .transaction-list {
+            list-style-type: none;
+        }
+        
+        .transaction-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .community-help {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .community-item {
+            flex: 1 1 250px;
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: 8px;
+        }
+        
+        .distance {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Billing Section */
+        .billing-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .summary-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .summary-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .invoice-table th,
+        .invoice-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .invoice-table th {
+            background: #f8fafc;
+            font-weight: 600;
+        }
+
+        .invoice-table tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Feedback System */
+        .feedback-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 5px;
+            margin: 10px 0;
+        }
+
+        .star {
+            font-size: 24px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #ffc107;
+        }
+
+        .feedback-list {
+            margin-top: 20px;
+        }
+
+        .feedback-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .feedback-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .feedback-rating {
+            color: #f59e0b;
+        }
+
+        /* Community Support */
+        .community-map {
+            height: 300px;
+            background: #e9ecef;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+
+        .support-resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .resource-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+        
+        .wellness-section {
+            background-color: #e8f4fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .wellness-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .wellness-option {
+            flex: 1 1 150px;
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(180deg, #ffffff, #f9fbff);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        
+        .wellness-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 24px 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+        }
+        
+        @media (max-width: 768px) {
+            .specialist-list,
+            .logistics,
+            .community-help,
+            .wellness-options {
+                flex-direction: column;
+            }
+            
+            .specialist-card,
+            .logistics-item,
+            .community-item,
+            .wellness-option {
+                flex: 1 1 auto;
+            }
+            
+            header {
+                padding: 22px;
+            }
+            
+            section {
+                padding: 18px;
+            }
+
+            .billing-summary,
+            .support-resources {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="hero-title">RuralMind Connect</h1>
+            <p class="hero-subtitle">Find Healthcare Specialists in Rural Areas</p>
+            <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="#specialists" class="btn" aria-label="Find specialists">
+                    <i class="fas fa-search"></i> Find Specialists
+                </a>
+                <a href="#billing" class="btn btn-secondary" aria-label="Billing">
+                    <i class="fas fa-file-invoice-dollar"></i> Billing
+                </a>
+                <a href="#community" class="btn btn-success" aria-label="Community">
+                    <i class="fas fa-users"></i> Community Support
+                </a>
+            </div>
+        </header>
+        
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" style="display: none">
+            <h2>Your Health Dashboard</h2>
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="appointments-count">0</div>
+                    <div class="stat-label">Upcoming Appointments</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                    <div class="stat-number" id="consultations-count">0</div>
+                    <div class="stat-label">Total Consultations</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                    <div class="stat-number" id="wellness-sessions">0</div>
+                    <div class="stat-label">Wellness Sessions</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #fdbb2d, #22c1c3);">
+                    <div class="stat-number" id="total-spent">₹0</div>
+                    <div class="stat-label">Total Spent</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="specialists">
+            <h2>Available Specialists</h2>
+            <div class="specialist-controls">
+                <button id="use-location" class="btn" type="button">
+                    <i class="fas fa-location-arrow"></i> Use my location
+                </button>
+                <div class="inline-input">
+                    <select id="city-select" aria-label="Select city">
+                        <option value="">Select a city</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="jaipur">Jaipur</option>
+                        <option value="lucknow">Lucknow</option>
+                        <option value="patna">Patna</option>
+                    </select>
+                </div>
+                <div class="inline-input">
+                    <select id="specialty-filter" aria-label="Filter by specialty">
+                        <option value="">All Specialties</option>
+                        <option value="General Physician">General Physician</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="ENT">ENT</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Gynecology">Gynecology</option>
+                    </select>
+                </div>
+                <button id="search-city" class="btn btn-secondary" type="button">
+                    <i class="fas fa-search"></i> Find specialists
+                </button>
+                <span id="location-status" class="muted" style="margin-left:6px"></span>
+            </div>
+            <div class="specialist-list" id="specialist-list">
+                <!-- Results will be rendered here dynamically -->
+            </div>
+        </section>
+
+        <!-- Billing & Payments Section -->
+        <section id="billing">
+            <h2><i class="fas fa-file-invoice-dollar"></i> Billing & Payments</h2>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="summary">Summary</div>
+                <div class="tab" data-tab="invoices">Invoices</div>
+                <div class="tab" data-tab="payment-methods">Payment Methods</div>
+            </div>
+
+            <div class="tab-content active" id="summary-tab">
+                <div class="billing-summary">
+                    <div class="summary-card">
+                        <div class="summary-number" id="total-balance">₹0</div>
+                        <div class="summary-label">Total Balance</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-number" id="due-amount">₹0</div>
+                        <div class="summary-label">Amount Due</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-number" id="paid-amount">₹0</div>
+                        <div class="summary-label">Total Paid</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-number" id="invoice-count">0</div>
+                        <div class="summary-label">Total Invoices</div>
+                    </div>
+                </div>
+
+                <h3>Recent Transactions</h3>
+                <div id="recent-transactions">
+                    <!-- Transactions will be loaded here -->
+                </div>
+            </div>
+
+            <div class="tab-content" id="invoices-tab">
+                <div class="action-buttons">
+                    <button class="btn btn-small" id="download-invoice">
+                        <i class="fas fa-download"></i> Download Invoice
+                    </button>
+                    <button class="btn btn-small btn-secondary" id="request-receipt">
+                        <i class="fas fa-receipt"></i> Request Receipt
+                    </button>
+                </div>
+                <table class="invoice-table">
+                    <thead>
+                        <tr>
+                            <th>Invoice #</th>
+                            <th>Date</th>
+                            <th>Service</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoice-list">
+                        <!-- Invoices will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-content" id="payment-methods-tab">
+                <h3>Payment Methods</h3>
+                <div id="payment-methods-list">
+                    <!-- Payment methods will be loaded here -->
+                </div>
+                <button class="btn" id="add-payment-method" style="margin-top: 15px;">
+                    <i class="fas fa-plus"></i> Add Payment Method
+                </button>
+            </div>
+        </section>
+
+        <!-- Feedback System -->
+        <section id="feedback">
+            <div class="feedback-section">
+                <h2 style="color: white;">Share Your Experience</h2>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px;">Help us improve our services by providing feedback</p>
+                
+                <form id="feedback-form">
+                    <div class="form-group">
+                        <label style="color: white;">Rate your experience</label>
+                        <div class="rating-stars" id="rating-stars">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <input type="hidden" id="rating-value" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label style="color: white;">Your Feedback</label>
+                        <textarea id="feedback-text" rows="4" placeholder="Tell us about your experience..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-paper-plane"></i> Submit Feedback
+                    </button>
+                </form>
+            </div>
+
+            <h3>Recent Feedback</h3>
+            <div class="feedback-list" id="feedback-list">
+                <!-- Feedback items will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Local Community Support -->
+        <section id="community">
+            <h2><i class="fas fa-users"></i> Local Community Support</h2>
+            
+            <div class="community-map">
+                <i class="fas fa-map-marked-alt" style="font-size: 48px; margin-right: 15px;"></i>
+                <div>
+                    <h3>Community Health Map</h3>
+                    <p>Interactive map showing local health resources and support groups</p>
+                </div>
+            </div>
+
+            <div class="support-resources">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-clinic-medical"></i>
+                    </div>
+                    <h3>Health Centers</h3>
+                    <p>Find nearby healthcare facilities and clinics</p>
+                    <button class="btn btn-small" style="margin-top: 10px;">Explore</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Support Groups</h3>
+                    <p>Join local mental health and wellness groups</p>
+                    <button class="btn btn-small" style="margin-top: 10px;">Find Groups</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-ambulance"></i>
+                    </div>
+                    <h3>Emergency Services</h3>
+                    <p>24/7 emergency contacts and services</p>
+                    <button class="btn btn-small" style="margin-top: 10px;">View Contacts</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Wellness Programs</h3>
+                    <p>Community health initiatives and programs</p>
+                    <button class="btn btn-small" style="margin-top: 10px;">Learn More</button>
+                </div>
+            </div>
+
+            <h3>Upcoming Community Events</h3>
+            <div id="community-events">
+                <!-- Community events will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Rest of your existing sections (Login, Account, etc.) -->
+        <section>
+            <h2>Join RuralMind Connect</h2>
+            <p>Create your account to access healthcare resources</p>
+            
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="middle-number">Phone Number</label>
+                    <input type="text" id="middle-number" placeholder="+91 XXXXX XXXXX">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required minlength="6">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" required>
+                </div>
+                
+                <button type="submit" class="btn">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+        </section>
+
+        <!-- Login Section -->
+        <section>
+            <h2>Login</h2>
+            <p class="muted">Sign in to continue where you left off</p>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+
+                <button type="submit" class="btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+        </section>
+
+        <!-- Account Section -->
+        <section id="account-section" style="display:none">
+            <h2>Your Account</h2>
+            <p>Signed in as <strong id="account-email"></strong></p>
+            <div style="margin-top:10px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button id="logout-btn" class="btn btn-secondary">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+                <button id="view-appointments" class="btn">
+                    <i class="fas fa-calendar-check"></i> My Appointments
+                </button>
+                <button id="view-billing" class="btn">
+                    <i class="fas fa-file-invoice"></i> Billing
+                </button>
+            </div>
+        </section>
+        
+        <footer>
+            <p>&copy; 2025 RuralMind Connect. Bringing healthcare to rural communities.</p>
+        </footer>
     </div>
-  );
-}
+
+    <!-- Billing Modals -->
+    <div class="modal" id="invoice-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Invoice Details</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div id="invoice-details">
+                <!-- Invoice details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="payment-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Make Payment</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="payment-form">
+                <div class="form-group">
+                    <label>Amount to Pay</label>
+                    <input type="number" id="payment-amount" required>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="payment-method" required>
+                        <option value="">Select payment method</option>
+                        <option value="card">Credit/Debit Card</option>
+                        <option value="upi">UPI</option>
+                        <option value="netbanking">Net Banking</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Pay Now</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced Data Models
+        const billingData = {
+            invoices: [
+                {
+                    id: 'INV-001',
+                    date: '2024-01-15',
+                    service: 'Consultation with Dr. Sharma',
+                    amount: 500,
+                    status: 'paid',
+                    description: 'General health checkup and consultation'
+                },
+                {
+                    id: 'INV-002',
+                    date: '2024-01-20',
+                    service: 'Lab Tests',
+                    amount: 1200,
+                    status: 'pending',
+                    description: 'Blood work and diagnostic tests'
+                },
+                {
+                    id: 'INV-003',
+                    date: '2024-02-01',
+                    service: 'Follow-up Consultation',
+                    amount: 300,
+                    status: 'overdue',
+                    description: 'Follow-up appointment'
+                }
+            ],
+            paymentMethods: [
+                { type: 'card', last4: '4242', provider: 'Visa' },
+                { type: 'upi', id: 'user@okicici' }
+            ]
+        };
+
+        const feedbackData = [
+            {
+                id: 1,
+                user: 'Rahul Kumar',
+                rating: 5,
+                comment: 'Excellent service! The doctors were very professional and caring.',
+                date: '2024-01-10',
+                service: 'General Consultation'
+            },
+            {
+                id: 2,
+                user: 'Priya Singh',
+                rating: 4,
+                comment: 'Good experience overall. Waiting time was a bit long.',
+                date: '2024-01-08',
+                service: 'Lab Tests'
+            }
+        ];
+
+        const communityResources = [
+            {
+                name: 'Primary Health Center',
+                type: 'clinic',
+                distance: '2.3 km',
+                services: ['General OPD', 'Vaccination', 'Basic Lab'],
+                contact: '+91-9876543210'
+            },
+            {
+                name: 'Mental Health Support Group',
+                type: 'support',
+                distance: '5.1 km',
+                services: ['Counseling', 'Group Therapy', 'Crisis Support'],
+                contact: '+91-9876543211'
+            },
+            {
+                name: 'Community Wellness Center',
+                type: 'wellness',
+                distance: '3.7 km',
+                services: ['Yoga Classes', 'Meditation', 'Nutrition Counseling'],
+                contact: '+91-9876543212'
+            }
+        ];
+
+        // Billing Functions
+        function loadBillingData() {
+            const savedData = localStorage.getItem('rmc_billing');
+            return savedData ? JSON.parse(savedData) : billingData;
+        }
+
+        function saveBillingData(data) {
+            localStorage.setItem('rmc_billing', JSON.stringify(data));
+        }
+
+        function updateBillingSummary() {
+            const data = loadBillingData();
+            const totalBalance = data.invoices.reduce((sum, inv) => sum + inv.amount, 0);
+            const dueAmount = data.invoices
+                .filter(inv => inv.status === 'pending'
