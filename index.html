@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #2c5aa0;
@@ -18,6 +19,7 @@
             --success: #28a745;
             --warning: #ffc107;
             --accent: #22c55e;
+            --danger: #dc3545;
             --bg-gradient-start: #f6f9ff;
             --bg-gradient-end: #eef2ff;
         }
@@ -33,6 +35,7 @@
             background: linear-gradient(180deg, var(--bg-gradient-start), var(--bg-gradient-end));
             color: var(--dark);
             line-height: 1.6;
+            min-height: 100vh;
         }
         
         .container {
@@ -49,6 +52,8 @@
             border-radius: 16px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.06);
             margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
         }
         
         h1 {
@@ -137,6 +142,27 @@
             background-color: #f8fafc;
             color: var(--secondary);
         }
+
+        .btn-success {
+            background-color: var(--success);
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-small {
+            padding: 8px 14px;
+            font-size: 0.85rem;
+        }
         
         .specialist-list {
             display: flex;
@@ -178,6 +204,7 @@
             border-radius: 8px;
             background: linear-gradient(180deg, #ffffff, #fafbff);
             transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+            position: relative;
         }
         
         .specialist-card:hover {
@@ -206,6 +233,23 @@
             font-size: 0.8rem;
             font-weight: 600;
         }
+
+        .specialty-badge {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 4px 8px;
+            background: #f0f9ff;
+            color: #0369a1;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        .rating {
+            color: #f59e0b;
+            margin-top: 4px;
+        }
         
         .form-group {
             margin-bottom: 15px;
@@ -219,27 +263,22 @@
         
         input[type="text"],
         input[type="email"],
-        input[type="password"] {
+        input[type="password"],
+        textarea,
+        select {
             width: 100%;
             padding: 10px;
             border: 1px solid var(--light-gray);
             border-radius: 5px;
             font-size: 1rem;
+            transition: border-color 0.2s;
         }
-        
-        button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: var(--secondary);
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--secondary);
+            outline: none;
         }
         
         .about-me {
@@ -331,6 +370,290 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 22px rgba(0,0,0,0.08);
         }
+
+        /* New Wellness Features */
+        .wellness-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wellness-modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .breathing-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 4s ease-in-out;
+        }
+
+        .meditation-timer {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: var(--primary);
+        }
+
+        .meditation-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .grounding-exercise {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .exercise-step {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* Appointment Booking */
+        .appointment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .appointment-modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin: 15px 0;
+        }
+
+        .calendar-day {
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .calendar-day:hover {
+            background-color: #f0f0f0;
+        }
+
+        .calendar-day.selected {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .time-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .time-slot {
+            padding: 8px 12px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .time-slot:hover {
+            background-color: #f0f0f0;
+        }
+
+        .time-slot.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Notification System */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .notification.error {
+            border-left: 4px solid var(--danger);
+        }
+
+        .notification.info {
+            border-left: 4px solid var(--primary);
+        }
+
+        /* Dashboard */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Chat System */
+        .chat-modal {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .message.bot {
+            background: #f1f1f1;
+            color: var(--dark);
+            align-self: flex-start;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--light-gray);
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 999;
+        }
         
         footer {
             text-align: center;
@@ -365,21 +688,88 @@
             section {
                 padding: 18px;
             }
+
+            .chat-modal {
+                width: 100%;
+                height: 100%;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Notification System -->
+    <div id="notification" class="notification">
+        <i class="fas fa-bell"></i>
+        <span id="notification-message">Notification message</span>
+    </div>
+
+    <!-- Chat Toggle -->
+    <div class="chat-toggle" id="chat-toggle">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Chat Modal -->
+    <div class="chat-modal" id="chat-modal">
+        <div class="chat-header">
+            <span>Health Assistant</span>
+            <button id="close-chat" class="btn btn-secondary btn-small">×</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot">
+                Hello! I'm your health assistant. How can I help you today?
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Type your message...">
+            <button id="send-message" class="btn btn-small">Send</button>
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <h1 class="hero-title">RuralMind Connect</h1>
             <p class="hero-subtitle">Find Healthcare Specialists in Rural Areas</p>
-            <a href="#specialists" class="btn" aria-label="Find specialists">Find Specialists</a>
+            <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="#specialists" class="btn" aria-label="Find specialists">
+                    <i class="fas fa-search"></i> Find Specialists
+                </a>
+                <a href="#wellness" class="btn btn-secondary" aria-label="Wellness tools">
+                    <i class="fas fa-heart"></i> Wellness Tools
+                </a>
+                <button id="open-chat" class="btn btn-success">
+                    <i class="fas fa-comment-medical"></i> Health Assistant
+                </button>
+            </div>
         </header>
+        
+        <!-- Dashboard Section (Visible when logged in) -->
+        <section id="dashboard-section" style="display: none">
+            <h2>Your Health Dashboard</h2>
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="appointments-count">0</div>
+                    <div class="stat-label">Upcoming Appointments</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                    <div class="stat-number" id="consultations-count">0</div>
+                    <div class="stat-label">Total Consultations</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                    <div class="stat-number" id="wellness-sessions">0</div>
+                    <div class="stat-label">Wellness Sessions</div>
+                </div>
+            </div>
+        </section>
         
         <section id="specialists">
             <h2>Available Specialists</h2>
             <div class="specialist-controls">
-                <button id="use-location" class="btn" type="button">Use my location</button>
+                <button id="use-location" class="btn" type="button">
+                    <i class="fas fa-location-arrow"></i> Use my location
+                </button>
                 <div class="inline-input">
                     <select id="city-select" aria-label="Select city">
                         <option value="">Select a city</option>
@@ -390,10 +780,24 @@
                         <option value="patna">Patna</option>
                     </select>
                 </div>
-                <button id="search-city" class="btn btn-secondary" type="button">Find specialists</button>
+                <div class="inline-input">
+                    <select id="specialty-filter" aria-label="Filter by specialty">
+                        <option value="">All Specialties</option>
+                        <option value="General Physician">General Physician</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="ENT">ENT</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Gynecology">Gynecology</option>
+                    </select>
+                </div>
+                <button id="search-city" class="btn btn-secondary" type="button">
+                    <i class="fas fa-search"></i> Find specialists
+                </button>
                 <span id="location-status" class="muted" style="margin-left:6px"></span>
             </div>
-            <div class="specialist-list">
+            <div class="specialist-list" id="specialist-list">
                 <!-- Results will be rendered here dynamically -->
             </div>
         </section>
@@ -409,8 +813,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="middle-number">Middle Number</label>
-                    <input type="text" id="middle-number">
+                    <label for="middle-number">Phone Number</label>
+                    <input type="text" id="middle-number" placeholder="+91 XXXXX XXXXX">
                 </div>
                 
                 <div class="form-group">
@@ -420,7 +824,7 @@
                 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" required>
+                    <input type="password" id="password" required minlength="6">
                 </div>
                 
                 <div class="form-group">
@@ -428,7 +832,9 @@
                     <input type="password" id="confirm-password" required>
                 </div>
                 
-                <button type="submit">Create Account</button>
+                <button type="submit" class="btn">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
             </form>
         </section>
 
@@ -447,15 +853,30 @@
                     <input type="password" id="login-password" required>
                 </div>
 
-                <button type="submit">Login</button>
+                <button type="submit" class="btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
             </form>
         </section>
 
         <section id="account-section" style="display:none">
             <h2>Your Account</h2>
             <p>Signed in as <strong id="account-email"></strong></p>
-            <div style="margin-top:10px">
-                <button id="logout-btn" class="btn btn-secondary">Logout</button>
+            <div style="margin-top:10px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button id="logout-btn" class="btn btn-secondary">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+                <button id="view-appointments" class="btn">
+                    <i class="fas fa-calendar-check"></i> My Appointments
+                </button>
+            </div>
+        </section>
+
+        <!-- Appointments Section -->
+        <section id="appointments-section" style="display: none">
+            <h2>Your Appointments</h2>
+            <div id="appointments-list">
+                <!-- Appointments will be listed here -->
             </div>
         </section>
         
@@ -551,19 +972,26 @@
             </div>
         </section>
         
-        <section class="wellness-section">
+        <section class="wellness-section" id="wellness">
             <h2>How are you feeling today?</h2>
             <p>It sounds like you're having a tough moment. Let's try to find some calm.</p>
             
             <div class="wellness-options">
-                <div class="wellness-option">
-                    <h3>Guided Breathing</h3>
+                <div class="wellness-option" id="guided-breathing">
+                    <h3><i class="fas fa-wind"></i> Guided Breathing</h3>
+                    <p>4-7-8 breathing technique</p>
                 </div>
-                <div class="wellness-option">
-                    <h3>Grounding Technique</h3>
+                <div class="wellness-option" id="grounding-technique">
+                    <h3><i class="fas fa-mountain"></i> Grounding Technique</h3>
+                    <p>5-4-3-2-1 sensory exercise</p>
                 </div>
-                <div class="wellness-option">
-                    <h3>Quick Meditation</h3>
+                <div class="wellness-option" id="quick-meditation">
+                    <h3><i class="fas fa-spa"></i> Quick Meditation</h3>
+                    <p>5-minute mindfulness session</p>
+                </div>
+                <div class="wellness-option" id="mood-tracker">
+                    <h3><i class="fas fa-chart-line"></i> Mood Tracker</h3>
+                    <p>Track your emotional wellbeing</p>
                 </div>
             </div>
         </section>
@@ -573,267 +1001,82 @@
         </footer>
     </div>
 
-    <script>
-        // Simple client-side auth with salted SHA-256 password hashing using Web Crypto.
-        // Data model in localStorage:
-        //   rmc_users: { [email]: { name, middleNumber, salt, hash, createdAt } }
-        //   rmc_session: { email }
+    <!-- Wellness Modals -->
+    <div class="wellness-modal" id="breathing-modal">
+        <div class="wellness-modal-content">
+            <h2>Guided Breathing Exercise</h2>
+            <p>Follow the 4-7-8 breathing pattern to reduce anxiety and promote relaxation.</p>
+            <div class="breathing-circle" id="breathing-circle">
+                Breathe In
+            </div>
+            <div class="meditation-controls">
+                <button id="start-breathing" class="btn btn-success">Start</button>
+                <button id="stop-breathing" class="btn btn-secondary">Stop</button>
+                <button id="close-breathing" class="btn btn-danger">Close</button>
+            </div>
+        </div>
+    </div>
 
-        function loadUsers() {
-            try {
-                const raw = localStorage.getItem('rmc_users');
-                return raw ? JSON.parse(raw) : {};
-            } catch (e) {
-                return {};
-            }
-        }
+    <div class="wellness-modal" id="grounding-modal">
+        <div class="wellness-modal-content">
+            <h2>Grounding Exercise</h2>
+            <p>Use the 5-4-3-2-1 technique to connect with your senses and stay present.</p>
+            <div class="grounding-exercise">
+                <div class="exercise-step">
+                    <strong>5 things you can see:</strong> Look around and name five things you can see.
+                </div>
+                <div class="exercise-step">
+                    <strong>4 things you can touch:</strong> Notice four things you can feel.
+                </div>
+                <div class="exercise-step">
+                    <strong>3 things you can hear:</strong> Listen carefully for three sounds.
+                </div>
+                <div class="exercise-step">
+                    <strong>2 things you can smell:</strong> Identify two scents around you.
+                </div>
+                <div class="exercise-step">
+                    <strong>1 thing you can taste:</strong> Focus on one taste in your mouth.
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="close-grounding" class="btn btn-primary">I feel more grounded</button>
+            </div>
+        </div>
+    </div>
 
-        function saveUsers(users) {
-            localStorage.setItem('rmc_users', JSON.stringify(users));
-        }
+    <div class="wellness-modal" id="meditation-modal">
+        <div class="wellness-modal-content">
+            <h2>Quick Meditation</h2>
+            <p>Take 5 minutes to focus on your breath and clear your mind.</p>
+            <div class="meditation-timer" id="meditation-timer">05:00</div>
+            <div class="meditation-controls">
+                <button id="start-meditation" class="btn btn-success">Start</button>
+                <button id="pause-meditation" class="btn btn-secondary" disabled>Pause</button>
+                <button id="reset-meditation" class="btn btn-danger">Reset</button>
+                <button id="close-meditation" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
 
-        function getSession() {
-            try {
-                const raw = localStorage.getItem('rmc_session');
-                return raw ? JSON.parse(raw) : null;
-            } catch (e) {
-                return null;
-            }
-        }
-
-        function setSession(email) {
-            localStorage.setItem('rmc_session', JSON.stringify({ email }));
-        }
-
-        function clearSession() {
-            localStorage.removeItem('rmc_session');
-        }
-
-        function generateSalt(byteLength = 16) {
-            const salt = new Uint8Array(byteLength);
-            crypto.getRandomValues(salt);
-            return Array.from(salt).map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        async function sha256Hex(input) {
-            const enc = new TextEncoder();
-            const data = enc.encode(input);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        async function hashPassword(password, salt) {
-            // Combine password + salt; in real apps, use a strong KDF. This is demo-only.
-            return sha256Hex(`${salt}:${password}`);
-        }
-
-        function updateAuthUI() {
-            const session = getSession();
-            const accountSection = document.getElementById('account-section');
-            const accountEmail = document.getElementById('account-email');
-            const signupForm = document.getElementById('signup-form');
-            const loginForm = document.getElementById('login-form');
-
-            if (session && session.email) {
-                accountSection.style.display = '';
-                accountEmail.textContent = session.email;
-                if (signupForm) signupForm.closest('section').style.display = 'none';
-                if (loginForm) loginForm.closest('section').style.display = 'none';
-            } else {
-                accountSection.style.display = 'none';
-                if (signupForm) signupForm.closest('section').style.display = '';
-                if (loginForm) loginForm.closest('section').style.display = '';
-            }
-        }
-        // Form validation
-        document.getElementById('signup-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('full-name').value.trim();
-            const middleNumber = document.getElementById('middle-number').value.trim();
-            const email = document.getElementById('email').value.trim().toLowerCase();
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-
-            if (!name) {
-                alert('Please enter your full name.');
-                return;
-            }
-            if (password.length < 6) {
-                alert('Password should be at least 6 characters.');
-                return;
-            }
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
-            }
-
-            const users = loadUsers();
-            if (users[email]) {
-                alert('An account with this email already exists. Please login.');
-                return;
-            }
-
-            const salt = generateSalt();
-            const hash = await hashPassword(password, salt);
-
-            users[email] = {
-                name,
-                middleNumber,
-                salt,
-                hash,
-                createdAt: new Date().toISOString()
-            };
-            saveUsers(users);
-            setSession(email);
-
-            alert('Account created successfully! You are now logged in.');
-            this.reset();
-            updateAuthUI();
-        });
-
-        // Login handling
-        document.getElementById('login-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value.trim().toLowerCase();
-            const password = document.getElementById('login-password').value;
-
-            const users = loadUsers();
-            const found = users[email];
-            if (!found) {
-                alert('No account found for this email. Please sign up.');
-                return;
-            }
-            const computed = await hashPassword(password, found.salt);
-            if (computed !== found.hash) {
-                alert('Incorrect password.');
-                return;
-            }
-            setSession(email);
-            alert('Logged in successfully.');
-            this.reset();
-            updateAuthUI();
-        });
-
-        // Logout
-        document.getElementById('logout-btn').addEventListener('click', function() {
-            clearSession();
-            updateAuthUI();
-        });
-        
-        // Add interactivity to wellness options
-        const wellnessOptions = document.querySelectorAll('.wellness-option');
-        wellnessOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                const technique = this.querySelector('h3').textContent;
-                alert(`Starting ${technique} session... Find a quiet space and relax.`);
-            });
-        });
-
-        // Initialize UI on load
-        document.addEventListener('DOMContentLoaded', updateAuthUI);
-
-        // ---------------- Location-based Specialists (Dummy Data) ----------------
-        const cityCoordinates = {
-            delhi: { name: 'Delhi', lat: 28.6139, lng: 77.2090 },
-            mumbai: { name: 'Mumbai', lat: 19.0760, lng: 72.8777 },
-            jaipur: { name: 'Jaipur', lat: 26.9124, lng: 75.7873 },
-            lucknow: { name: 'Lucknow', lat: 26.8467, lng: 80.9462 },
-            patna: { name: 'Patna', lat: 25.5941, lng: 85.1376 }
-        };
-
-        const specialists = [
-            { name: 'Dr. Aren Sharma', contact: 'www.frankhospital.com', specialty: 'General Physician', city: 'Delhi', lat: 28.64, lng: 77.22 },
-            { name: 'Dr. Shalip Gupta', contact: 'Dr.Shalip@yahoo.com', specialty: 'Pediatrics', city: 'Delhi', lat: 28.58, lng: 77.18 },
-            { name: 'Dr. Hildi Kao', contact: 'Kongshu@yahoo.com', specialty: 'Dermatology', city: 'Mumbai', lat: 19.09, lng: 72.88 },
-            { name: 'Dr. R. Singh', contact: 'rsingh@health.org', specialty: 'Cardiology', city: 'Jaipur', lat: 26.90, lng: 75.80 },
-            { name: 'Dr. P. Verma', contact: 'verma.clinic.in', specialty: 'ENT', city: 'Lucknow', lat: 26.85, lng: 80.95 },
-            { name: 'Dr. N. Kumar', contact: 'clinic.kumar@example.com', specialty: 'Orthopedics', city: 'Patna', lat: 25.60, lng: 85.14 },
-            { name: 'Dr. Meera Das', contact: 'meeradas@example.com', specialty: 'Gynecology', city: 'Mumbai', lat: 19.07, lng: 72.84 }
-        ];
-
-        function toRad(v) { return v * Math.PI / 180; }
-
-        function distanceKm(a, b) {
-            const R = 6371; // km
-            const dLat = toRad(b.lat - a.lat);
-            const dLng = toRad(b.lng - a.lng);
-            const lat1 = toRad(a.lat);
-            const lat2 = toRad(b.lat);
-            const x = Math.sin(dLat/2) ** 2 + Math.sin(dLng/2) ** 2 * Math.cos(lat1) * Math.cos(lat2);
-            const y = 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
-            return R * y;
-        }
-
-        function renderSpecialists(origin, maxDistance = 200) {
-            const list = document.querySelector('#specialists .specialist-list');
-            list.innerHTML = '';
-            const enriched = specialists.map(s => {
-                const d = distanceKm(origin, { lat: s.lat, lng: s.lng });
-                return { ...s, distance: d };
-            }).sort((a, b) => a.distance - b.distance);
-
-            const filtered = enriched.filter(s => s.distance <= maxDistance);
-            const toShow = filtered.length ? filtered : enriched.slice(0, 6);
-
-            toShow.forEach(s => {
-                const card = document.createElement('div');
-                card.className = 'specialist-card';
-                card.innerHTML = `
-                    <div class="specialist-name">${s.name}</div>
-                    <div>${s.specialty} • ${s.city}</div>
-                    <div class="specialist-contact">${s.contact}</div>
-                    <span class="distance-badge">${s.distance.toFixed(1)} km</span>
-                `;
-                list.appendChild(card);
-            });
-        }
-
-        function setLocationStatus(msg, isError = false) {
-            const el = document.getElementById('location-status');
-            el.textContent = msg;
-            el.style.color = isError ? '#b91c1c' : 'var(--gray)';
-        }
-
-        // Use my location
-        document.getElementById('use-location').addEventListener('click', () => {
-            if (!('geolocation' in navigator)) {
-                setLocationStatus('Geolocation not supported in this browser.', true);
-                return;
-            }
-            setLocationStatus('Detecting your location…');
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    const coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-                    setLocationStatus('Showing nearest specialists');
-                    renderSpecialists(coords);
-                },
-                (err) => {
-                    setLocationStatus('Location permission denied. Select a city instead.', true);
-                },
-                { enableHighAccuracy: true, timeout: 8000 }
-            );
-        });
-
-        // Manual city search
-        document.getElementById('search-city').addEventListener('click', () => {
-            const key = (document.getElementById('city-select').value || '').toLowerCase();
-            if (!key || !cityCoordinates[key]) {
-                setLocationStatus('Please select a city.', true);
-                return;
-            }
-            const c = cityCoordinates[key];
-            setLocationStatus(`Showing specialists near ${c.name}`);
-            renderSpecialists({ lat: c.lat, lng: c.lng });
-        });
-
-        // Default: show Delhi vicinity on first load for a non-empty view
-        window.addEventListener('load', () => {
-            const c = cityCoordinates['delhi'];
-            renderSpecialists({ lat: c.lat, lng: c.lng });
-        });
-    </script>
-</body>
-</html>
-      
+    <div class="wellness-modal" id="mood-modal">
+        <div class="wellness-modal-content">
+            <h2>Mood Tracker</h2>
+            <p>How are you feeling right now?</p>
+            <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+                <div style="text-align: center; cursor: pointer;" class="mood-option" data-mood="1">
+                    <div style="font-size: 48px;">😢</div>
+                    <div>Very Sad</div>
+                </div>
+                <div style="text-align: center; cursor: pointer;" class="mood-option" data-mood="2">
+                    <div style="font-size: 48px;">😔</div>
+                    <div>Sad</div>
+                </div>
+                <div style="text-align: center; cursor: pointer;" class="mood-option" data-mood="3">
+                    <div style="font-size: 48px;">😐</div>
+                    <div>Neutral</div>
+                </div>
+                <div style="text-align: center; cursor: pointer;" class="mood-option" data-mood="4">
+                    <div style="font-size: 48px;">😊</div>
+                    <div>Happy</div>
+                </div>
+                <div style="text-align: center; cursor: pointer;" class="m
