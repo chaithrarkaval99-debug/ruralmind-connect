@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RuralMind Connect | Find Healthcare Specialists</title>
+    <style>
+        :root {
+            --primary: #2c5aa0;
+            --secondary: #4a90e2;
+            --light: #f5f7fa;
+            --dark: #333;
+            --gray: #777;
+            --light-gray: #eaeaea;
+            --success: #28a745;
+            --warning: #ffc107;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin: 20px 0 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 15px 0 10px;
+        }
+        
+        section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .specialist-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .specialist-card {
+            flex: 1 1 300px;
+            padding: 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .specialist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .specialist-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .specialist-contact {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: var(--secondary);
+        }
+        
+        .about-me {
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        .logistics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .logistics-item {
+            flex: 1 1 200px;
+        }
+        
+        .payment-card {
+            background-color: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .payment-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .payment-amount {
+            font-weight: bold;
+            color: var(--primary);
+            margin-top: 5px;
+        }
+        
+        .transaction-list {
+            list-style-type: none;
+        }
+        
+        .transaction-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .community-help {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .community-item {
+            flex: 1 1 250px;
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: 8px;
+        }
+        
+        .distance {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .wellness-section {
+            background-color: #e8f4fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .wellness-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .wellness-option {
+            flex: 1 1 150px;
+            text-align: center;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .wellness-option:hover {
+            transform: scale(1.05);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .specialist-list,
+            .logistics,
+            .community-help,
+            .wellness-options {
+                flex-direction: column;
+            }
+            
+            .specialist-card,
+            .logistics-item,
+            .community-item,
+            .wellness-option {
+                flex: 1 1 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RuralMind Connect</h1>
+            <p>Find Healthcare Specialists in Rural Areas</p>
+        </header>
+        
+        <section>
+            <h2>Available Specialists</h2>
+            <div class="specialist-list">
+                <div class="specialist-card">
+                    <div class="specialist-name">Dr. Aren Sharma</div>
+                    <div class="specialist-contact">www.frankhospital.com</div>
+                </div>
+                <div class="specialist-card">
+                    <div class="specialist-name">Dr. Shalip Gupta</div>
+                    <div class="specialist-contact">Dr.Shalip@yahoo.com</div>
+                </div>
+                <div class="specialist-card">
+                    <div class="specialist-name">Dr. Hildi Kao</div>
+                    <div class="specialist-contact">Kongshu@yahoo.com</div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Join RuralMind Connect</h2>
+            <p>Create your account to access healthcare resources</p>
+            
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="middle-number">Middle Number</label>
+                    <input type="text" id="middle-number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" required>
+                </div>
+                
+                <button type="submit">Create Account</button>
+            </form>
+        </section>
+        
+        <section>
+            <h2>Contact Address</h2>
+            <p>Audio base <a href="#">www.monet1.org/3</a></p>
+        </section>
+        
+        <section>
+            <h2>About Our Service</h2>
+            <div class="about-me">
+                <p>The first 20th Sharon's internal psychologist who was a Senior Congestion Manager, who has been a member of the organization and senior advisory candidate in cognitive behavior systems (CBT) which is a role that is responsible for the application of an appropriate voice system to provide safe and respectful feedback from the organization and their neighbors. In addition, he also provides such feedback with his colleagues.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Service Logistics</h2>
+            <div class="logistics">
+                <div class="logistics-item">
+                    <h3>Healthcare Management System</h3>
+                </div>
+                <div class="logistics-item">
+                    <h3>Languages Supported</h3>
+                    <p>English, Hindi</p>
+                </div>
+                <div class="logistics-item">
+                    <h3>Book Audio Consultation</h3>
+                    <p>Available via multiple platforms</p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Find Care & Support That's Right For You</h2>
+            <p>Healthcare modules tailored to rural community needs.</p>
+        </section>
+        
+        <section>
+            <h2>Privacy & Data Security</h2>
+            <p>Your health data is protected and secure.</p>
+            
+            <div class="logistics">
+                <div class="logistics-item">
+                    <h3>Data Usage</h3>
+                    <p>Secure data handling protocols</p>
+                </div>
+                <div class="logistics-item">
+                    <h3>Community Coordination</h3>
+                    <p>Local health updates</p>
+                </div>
+                <div class="logistics-item">
+                    <h3>Resource Network</h3>
+                    <p>Connected healthcare nodes</p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Billing & Payments</h2>
+            <p>Transparent financial history and awareness</p>
+            
+            <h3>Upcoming Payments</h3>
+            <div class="payment-card">
+                <h4>Consultation with Dr. Shams</h4>
+                <p class="payment-date">Upcoming Session</p>
+                <p class="payment-amount">Subscription Fee</p>
+            </div>
+            
+            <h3>Past Transactions</h3>
+            <ul class="transaction-list">
+                <li class="transaction-item">
+                    <h4>Previous visit</h4>
+                    <p>Healthcare consultation session completed successfully.</p>
+                    <p>Follow-up care instructions provided.</p>
+                </li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Local Community Support</h2>
+            <p>Find nearby health communities and support groups.</p>
+            
+            <div class="community-help">
+                <div class="community-item">
+                    <h3>Primary Health Center</h3>
+                    <p class="distance">Distance: 23 km</p>
+                </div>
+                <div class="community-item">
+                    <h3>Community NGOs</h3>
+                    <p>Local Support Network</p>
+                    <p>Emergency contact available</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="wellness-section">
+            <h2>How are you feeling today?</h2>
+            <p>It sounds like you're having a tough moment. Let's try to find some calm.</p>
+            
+            <div class="wellness-options">
+                <div class="wellness-option">
+                    <h3>Guided Breathing</h3>
+                </div>
+                <div class="wellness-option">
+                    <h3>Grounding Technique</h3>
+                </div>
+                <div class="wellness-option">
+                    <h3>Quick Meditation</h3>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>&copy; 2025 RuralMind Connect. Bringing healthcare to rural communities.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Form validation
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            alert('Account created successfully! Welcome to RuralMind Connect!');
+            this.reset();
+        });
+        
+        // Add interactivity to wellness options
+        const wellnessOptions = document.querySelectorAll('.wellness-option');
+        wellnessOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const technique = this.querySelector('h3').textContent;
+                alert(`Starting ${technique} session... Find a quiet space and relax.`);
+            });
+        });
+    </script>
+</body>
+</html>
