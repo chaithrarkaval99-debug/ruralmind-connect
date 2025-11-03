@@ -3,7 +3,7 @@
 A web application for finding healthcare specialists in rural areas.
 
 ## 🚀 Live Demo
-[View Live Site](https://chaltharkava89.github.io/ruralmind-connect/)
+[View Live Site](https://chaithrarkaval99-debug.github.io/ruralmind-connect/)
 
 ## ✨ Features
 - Specialist directory with contact information
