@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RuralMind Connect | Find Healthcare Specialists</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2c5aa0;
@@ -14,17 +17,20 @@
             --light-gray: #eaeaea;
             --success: #28a745;
             --warning: #ffc107;
+            --accent: #22c55e;
+            --bg-gradient-start: #f6f9ff;
+            --bg-gradient-end: #eef2ff;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: var(--light);
+            background: linear-gradient(180deg, var(--bg-gradient-start), var(--bg-gradient-end));
             color: var(--dark);
             line-height: 1.6;
         }
@@ -32,27 +38,42 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 24px;
         }
         
         header {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            background: radial-gradient(1200px 400px at 20% -10%, rgba(76, 161, 255, 0.15), transparent),
+                        radial-gradient(1200px 400px at 80% -10%, rgba(34, 197, 94, 0.12), transparent),
+                        white;
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            margin-bottom: 24px;
         }
         
         h1 {
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
         }
         
         h2 {
             color: var(--primary);
-            margin: 20px 0 10px;
-            padding-bottom: 5px;
+            margin: 12px 0 10px;
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--light-gray);
+            position: relative;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 56px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 3px;
         }
         
         h3 {
@@ -62,10 +83,59 @@
         
         section {
             background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+            margin-bottom: 22px;
+        }
+
+        .muted {
+            color: var(--gray);
+        }
+
+        .hero-title {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            color: var(--gray);
+            margin-bottom: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 6px 18px rgba(44, 90, 160, 0.25);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(74, 144, 226, 0.28);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: var(--primary);
+            border: 1px solid var(--light-gray);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f8fafc;
+            color: var(--secondary);
         }
         
         .specialist-list {
@@ -75,17 +145,45 @@
             margin-top: 15px;
         }
         
+        .specialist-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .inline-input {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 1px solid var(--light-gray);
+            border-radius: 999px;
+            padding: 6px 10px;
+        }
+
+        .inline-input input,
+        .inline-input select {
+            border: none;
+            outline: none;
+            font-size: 0.95rem;
+            background: transparent;
+        }
+
         .specialist-card {
             flex: 1 1 300px;
             padding: 15px;
             border: 1px solid var(--light-gray);
             border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: linear-gradient(180deg, #ffffff, #fafbff);
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
         }
         
         .specialist-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            border-color: #dbe7ff;
+            box-shadow: 0 10px 24px rgba(76, 161, 255, 0.15);
         }
         
         .specialist-name {
@@ -96,6 +194,17 @@
         .specialist-contact {
             color: var(--secondary);
             font-size: 0.9rem;
+        }
+
+        .distance-badge {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 4px 8px;
+            background: #eef4ff;
+            color: var(--primary);
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
         
         .form-group {
@@ -149,7 +258,7 @@
         }
         
         .payment-card {
-            background-color: var(--light);
+            background: linear-gradient(180deg, #f6faff, #f2f6ff);
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 15px;
@@ -212,22 +321,26 @@
             flex: 1 1 150px;
             text-align: center;
             padding: 15px;
-            background-color: white;
+            background: linear-gradient(180deg, #ffffff, #f9fbff);
             border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.25s, box-shadow 0.25s;
         }
         
         .wellness-option:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.08);
         }
         
         footer {
             text-align: center;
             margin-top: 30px;
-            padding: 20px;
+            padding: 24px 20px;
             color: var(--gray);
             font-size: 0.9rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
         }
         
         @media (max-width: 768px) {
@@ -244,31 +357,44 @@
             .wellness-option {
                 flex: 1 1 auto;
             }
+            
+            header {
+                padding: 22px;
+            }
+            
+            section {
+                padding: 18px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>RuralMind Connect</h1>
-            <p>Find Healthcare Specialists in Rural Areas</p>
+            <h1 class="hero-title">RuralMind Connect</h1>
+            <p class="hero-subtitle">Find Healthcare Specialists in Rural Areas</p>
+            <a href="#specialists" class="btn" aria-label="Find specialists">Find Specialists</a>
         </header>
         
-        <section>
+        <section id="specialists">
             <h2>Available Specialists</h2>
+            <div class="specialist-controls">
+                <button id="use-location" class="btn" type="button">Use my location</button>
+                <div class="inline-input">
+                    <select id="city-select" aria-label="Select city">
+                        <option value="">Select a city</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="jaipur">Jaipur</option>
+                        <option value="lucknow">Lucknow</option>
+                        <option value="patna">Patna</option>
+                    </select>
+                </div>
+                <button id="search-city" class="btn btn-secondary" type="button">Find specialists</button>
+                <span id="location-status" class="muted" style="margin-left:6px"></span>
+            </div>
             <div class="specialist-list">
-                <div class="specialist-card">
-                    <div class="specialist-name">Dr. Aren Sharma</div>
-                    <div class="specialist-contact">www.frankhospital.com</div>
-                </div>
-                <div class="specialist-card">
-                    <div class="specialist-name">Dr. Shalip Gupta</div>
-                    <div class="specialist-contact">Dr.Shalip@yahoo.com</div>
-                </div>
-                <div class="specialist-card">
-                    <div class="specialist-name">Dr. Hildi Kao</div>
-                    <div class="specialist-contact">Kongshu@yahoo.com</div>
-                </div>
+                <!-- Results will be rendered here dynamically -->
             </div>
         </section>
         
@@ -304,6 +430,33 @@
                 
                 <button type="submit">Create Account</button>
             </form>
+        </section>
+
+        <section>
+            <h2>Login</h2>
+            <p class="muted">Sign in to continue where you left off</p>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+
+                <button type="submit">Login</button>
+            </form>
+        </section>
+
+        <section id="account-section" style="display:none">
+            <h2>Your Account</h2>
+            <p>Signed in as <strong id="account-email"></strong></p>
+            <div style="margin-top:10px">
+                <button id="logout-btn" class="btn btn-secondary">Logout</button>
+            </div>
         </section>
         
         <section>
@@ -421,20 +574,152 @@
     </div>
 
     <script>
+        // Simple client-side auth with salted SHA-256 password hashing using Web Crypto.
+        // Data model in localStorage:
+        //   rmc_users: { [email]: { name, middleNumber, salt, hash, createdAt } }
+        //   rmc_session: { email }
+
+        function loadUsers() {
+            try {
+                const raw = localStorage.getItem('rmc_users');
+                return raw ? JSON.parse(raw) : {};
+            } catch (e) {
+                return {};
+            }
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem('rmc_users', JSON.stringify(users));
+        }
+
+        function getSession() {
+            try {
+                const raw = localStorage.getItem('rmc_session');
+                return raw ? JSON.parse(raw) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function setSession(email) {
+            localStorage.setItem('rmc_session', JSON.stringify({ email }));
+        }
+
+        function clearSession() {
+            localStorage.removeItem('rmc_session');
+        }
+
+        function generateSalt(byteLength = 16) {
+            const salt = new Uint8Array(byteLength);
+            crypto.getRandomValues(salt);
+            return Array.from(salt).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function sha256Hex(input) {
+            const enc = new TextEncoder();
+            const data = enc.encode(input);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function hashPassword(password, salt) {
+            // Combine password + salt; in real apps, use a strong KDF. This is demo-only.
+            return sha256Hex(`${salt}:${password}`);
+        }
+
+        function updateAuthUI() {
+            const session = getSession();
+            const accountSection = document.getElementById('account-section');
+            const accountEmail = document.getElementById('account-email');
+            const signupForm = document.getElementById('signup-form');
+            const loginForm = document.getElementById('login-form');
+
+            if (session && session.email) {
+                accountSection.style.display = '';
+                accountEmail.textContent = session.email;
+                if (signupForm) signupForm.closest('section').style.display = 'none';
+                if (loginForm) loginForm.closest('section').style.display = 'none';
+            } else {
+                accountSection.style.display = 'none';
+                if (signupForm) signupForm.closest('section').style.display = '';
+                if (loginForm) loginForm.closest('section').style.display = '';
+            }
+        }
         // Form validation
-        document.getElementById('signup-form').addEventListener('submit', function(e) {
+        document.getElementById('signup-form').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
+            const name = document.getElementById('full-name').value.trim();
+            const middleNumber = document.getElementById('middle-number').value.trim();
+            const email = document.getElementById('email').value.trim().toLowerCase();
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
-            
+
+            if (!name) {
+                alert('Please enter your full name.');
+                return;
+            }
+            if (password.length < 6) {
+                alert('Password should be at least 6 characters.');
+                return;
+            }
             if (password !== confirmPassword) {
                 alert('Passwords do not match!');
                 return;
             }
-            
-            alert('Account created successfully! Welcome to RuralMind Connect!');
+
+            const users = loadUsers();
+            if (users[email]) {
+                alert('An account with this email already exists. Please login.');
+                return;
+            }
+
+            const salt = generateSalt();
+            const hash = await hashPassword(password, salt);
+
+            users[email] = {
+                name,
+                middleNumber,
+                salt,
+                hash,
+                createdAt: new Date().toISOString()
+            };
+            saveUsers(users);
+            setSession(email);
+
+            alert('Account created successfully! You are now logged in.');
             this.reset();
+            updateAuthUI();
+        });
+
+        // Login handling
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim().toLowerCase();
+            const password = document.getElementById('login-password').value;
+
+            const users = loadUsers();
+            const found = users[email];
+            if (!found) {
+                alert('No account found for this email. Please sign up.');
+                return;
+            }
+            const computed = await hashPassword(password, found.salt);
+            if (computed !== found.hash) {
+                alert('Incorrect password.');
+                return;
+            }
+            setSession(email);
+            alert('Logged in successfully.');
+            this.reset();
+            updateAuthUI();
+        });
+
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            clearSession();
+            updateAuthUI();
         });
         
         // Add interactivity to wellness options
@@ -445,6 +730,110 @@
                 alert(`Starting ${technique} session... Find a quiet space and relax.`);
             });
         });
+
+        // Initialize UI on load
+        document.addEventListener('DOMContentLoaded', updateAuthUI);
+
+        // ---------------- Location-based Specialists (Dummy Data) ----------------
+        const cityCoordinates = {
+            delhi: { name: 'Delhi', lat: 28.6139, lng: 77.2090 },
+            mumbai: { name: 'Mumbai', lat: 19.0760, lng: 72.8777 },
+            jaipur: { name: 'Jaipur', lat: 26.9124, lng: 75.7873 },
+            lucknow: { name: 'Lucknow', lat: 26.8467, lng: 80.9462 },
+            patna: { name: 'Patna', lat: 25.5941, lng: 85.1376 }
+        };
+
+        const specialists = [
+            { name: 'Dr. Aren Sharma', contact: 'www.frankhospital.com', specialty: 'General Physician', city: 'Delhi', lat: 28.64, lng: 77.22 },
+            { name: 'Dr. Shalip Gupta', contact: 'Dr.Shalip@yahoo.com', specialty: 'Pediatrics', city: 'Delhi', lat: 28.58, lng: 77.18 },
+            { name: 'Dr. Hildi Kao', contact: 'Kongshu@yahoo.com', specialty: 'Dermatology', city: 'Mumbai', lat: 19.09, lng: 72.88 },
+            { name: 'Dr. R. Singh', contact: 'rsingh@health.org', specialty: 'Cardiology', city: 'Jaipur', lat: 26.90, lng: 75.80 },
+            { name: 'Dr. P. Verma', contact: 'verma.clinic.in', specialty: 'ENT', city: 'Lucknow', lat: 26.85, lng: 80.95 },
+            { name: 'Dr. N. Kumar', contact: 'clinic.kumar@example.com', specialty: 'Orthopedics', city: 'Patna', lat: 25.60, lng: 85.14 },
+            { name: 'Dr. Meera Das', contact: 'meeradas@example.com', specialty: 'Gynecology', city: 'Mumbai', lat: 19.07, lng: 72.84 }
+        ];
+
+        function toRad(v) { return v * Math.PI / 180; }
+
+        function distanceKm(a, b) {
+            const R = 6371; // km
+            const dLat = toRad(b.lat - a.lat);
+            const dLng = toRad(b.lng - a.lng);
+            const lat1 = toRad(a.lat);
+            const lat2 = toRad(b.lat);
+            const x = Math.sin(dLat/2) ** 2 + Math.sin(dLng/2) ** 2 * Math.cos(lat1) * Math.cos(lat2);
+            const y = 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+            return R * y;
+        }
+
+        function renderSpecialists(origin, maxDistance = 200) {
+            const list = document.querySelector('#specialists .specialist-list');
+            list.innerHTML = '';
+            const enriched = specialists.map(s => {
+                const d = distanceKm(origin, { lat: s.lat, lng: s.lng });
+                return { ...s, distance: d };
+            }).sort((a, b) => a.distance - b.distance);
+
+            const filtered = enriched.filter(s => s.distance <= maxDistance);
+            const toShow = filtered.length ? filtered : enriched.slice(0, 6);
+
+            toShow.forEach(s => {
+                const card = document.createElement('div');
+                card.className = 'specialist-card';
+                card.innerHTML = `
+                    <div class="specialist-name">${s.name}</div>
+                    <div>${s.specialty} • ${s.city}</div>
+                    <div class="specialist-contact">${s.contact}</div>
+                    <span class="distance-badge">${s.distance.toFixed(1)} km</span>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function setLocationStatus(msg, isError = false) {
+            const el = document.getElementById('location-status');
+            el.textContent = msg;
+            el.style.color = isError ? '#b91c1c' : 'var(--gray)';
+        }
+
+        // Use my location
+        document.getElementById('use-location').addEventListener('click', () => {
+            if (!('geolocation' in navigator)) {
+                setLocationStatus('Geolocation not supported in this browser.', true);
+                return;
+            }
+            setLocationStatus('Detecting your location…');
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    const coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+                    setLocationStatus('Showing nearest specialists');
+                    renderSpecialists(coords);
+                },
+                (err) => {
+                    setLocationStatus('Location permission denied. Select a city instead.', true);
+                },
+                { enableHighAccuracy: true, timeout: 8000 }
+            );
+        });
+
+        // Manual city search
+        document.getElementById('search-city').addEventListener('click', () => {
+            const key = (document.getElementById('city-select').value || '').toLowerCase();
+            if (!key || !cityCoordinates[key]) {
+                setLocationStatus('Please select a city.', true);
+                return;
+            }
+            const c = cityCoordinates[key];
+            setLocationStatus(`Showing specialists near ${c.name}`);
+            renderSpecialists({ lat: c.lat, lng: c.lng });
+        });
+
+        // Default: show Delhi vicinity on first load for a non-empty view
+        window.addEventListener('load', () => {
+            const c = cityCoordinates['delhi'];
+            renderSpecialists({ lat: c.lat, lng: c.lng });
+        });
     </script>
 </body>
 </html>
+      
