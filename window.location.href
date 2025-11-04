@@ -1,0 +1,4 @@
+function contactPrimaryCenter() {
+  // Navigate to the next page
+  window.location.href = "primary-health-center.html";
+}
